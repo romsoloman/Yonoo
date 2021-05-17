@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: $clr1;
+    color: $clr6;
+}
+
+html {
+    font-family: "Macan","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.6;
+    height: 100%;
+}
+
+body {
+    transition: all .5s ;
+    color: #62646a;
+    font-size: rem(18px);
+    margin: 0;
+    height: 100%;
+}
+
+#app {
+    padding-top: 90px;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+    color:$clr3;
+}
+
+ main, footer {
+    padding: 5px;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color:$clr3;
+}
+a:hover {
+    text-decoration: none;
+}
+input:focus{
+    outline: none;
+}
+button:focus{
+    outline: none;
+}
+
+img{width:20px;height: 20px;margin-right: 5px;}
+
+ul {padding: 0; list-style-type: none;}

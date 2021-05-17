@@ -1,0 +1,1 @@
+export { CoinsChart } from './CoinsChart'

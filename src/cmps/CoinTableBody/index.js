@@ -1,0 +1,1 @@
+export { CoinTableBody } from './CoinTableBody'
