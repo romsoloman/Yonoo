@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     flex: {
         display: 'flex',
         alignItems: 'center',
+    },
+    hidden: {
+        display: 'none'
     }
 }));
 
@@ -49,6 +52,7 @@ export const CoinsTable = (props) => {
 
 
     const handleRequestSort = (event, property) => {
+        if (property === 'priceGraph7d') return;
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);

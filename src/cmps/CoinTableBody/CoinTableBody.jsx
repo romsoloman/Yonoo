@@ -30,7 +30,7 @@ export const CoinTableBody = ({ coins, order, orderBy, page, rowsPerPage, emptyR
                                 {row.rank}
                             </TableCell>
                             <TableCell align="center"><div className="flex align-center"><img src={row.icon} alt="" />{row.name}</div></TableCell>
-                            <TableCell align="center" style={row.priceChange1d > 0 ? { color: 'green' } : { color: 'red' }}><div className='flex align-center'>{row.priceChange1d > 0 ? <ExpandLessIcon /> : <ExpandMoreIcon />}{row.priceChange1d}%</div></TableCell>
+                            <TableCell align="center" style={row.priceChange1d > 0 ? { color: 'green' } : { color: 'red' }}>{row.priceChange1d}</TableCell>
                             <TableCell align="right">${row.price.toLocaleString()}</TableCell>
                             <TableCell align="right">{row.priceBtc.toFixed(8)}</TableCell>
                             <TableCell align="center">{utilService.nFormatter(row.marketCap, 2)}</TableCell>

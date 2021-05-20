@@ -65,7 +65,7 @@ export const CoinsChart = (props) => {
             },
             y: {
                 ticks: {
-                    maxTicksLimit: coinsToCompare.length > 0 && labels[0].length
+                    maxTicksLimit: coinsToCompare.length > 0 && labels[0].length,
                 }
             }
         }

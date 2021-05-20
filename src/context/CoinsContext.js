@@ -7,7 +7,6 @@ export const CoinsProvider = ({ children }) => {
     const [coins, setCoins] = useState([]);
     const [coinsToCompare, setCoinsToCompare] = useState([]);
 
-
     useEffect(() => {
         loadCoins();
     }, [])
@@ -25,7 +24,10 @@ export const CoinsProvider = ({ children }) => {
 
     const removeCoin = (coinId, isChart) => {
         const coinsData = isChart ? JSON.parse(JSON.stringify(coinsToCompare)) : JSON.parse(JSON.stringify(coins))
-        const idx = coinsData.findIndex(coin => coin.id === coinId);
+        const idx = coinsData.findIndex(coin => {
+            coin.isAdd = false;
+            return coin.id === coinId
+        });
         if (idx !== -1) {
             coinsData.splice(idx, 1);
         }
@@ -39,6 +41,7 @@ export const CoinsProvider = ({ children }) => {
             coinsData.forEach(coin => {
                 if (coin.id === coinId) {
                     coin.priceRates = compareCoinPrice
+                    coin.isAdd = true;
                     setCoinsToCompare(prevState => [...prevState, coin])
                 }
             });
@@ -46,6 +49,7 @@ export const CoinsProvider = ({ children }) => {
             console.log('err- cant compare coins', err);
         }
     }
+
 
     return (
         <CoinsContext.Provider value={{

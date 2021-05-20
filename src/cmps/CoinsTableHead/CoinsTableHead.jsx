@@ -5,12 +5,12 @@ import { FilterMenu } from '../FilterMenu/FilterMenu'
 const headCells = [
     { id: 'rank', numeric: true, disablePadding: true, label: '#' },
     { id: 'name', numeric: false, disablePadding: false, label: 'NAME' },
-    { id: 'priceChange24h', numeric: true, disablePadding: false, label: '24H CHANGE' },
+    { id: 'priceChange1d', numeric: true, disablePadding: false, label: '24H CHANGE' },
     { id: 'price', numeric: true, disablePadding: false, label: 'PRICE' },
     { id: 'priceBtc', numeric: true, disablePadding: false, label: 'PRICE IN BTC' },
     { id: 'marketCap', numeric: true, disablePadding: false, label: 'MARKET CAP' },
     { id: 'volume', numeric: true, disablePadding: false, label: 'VOLUME 24H' },
-    { id: 'priceGraph7d', numeric: false, disablePadding: false, label: 'PRICE GRAPH (7D)' },
+    { id: 'priceGraph7d', numeric: false, disablePadding: false, label: 'PRICE GRAPH (7D)', },
 ];
 
 export const CoinsTableHead = (props) => {
@@ -18,7 +18,6 @@ export const CoinsTableHead = (props) => {
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
-
     return (
         <TableHead>
             <TableRow>

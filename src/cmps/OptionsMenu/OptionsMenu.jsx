@@ -23,21 +23,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const OptionsMenu = ({ coinId, range }) => {
-
     const classes = useStyles();
     const [open, setOpen] = useState(false);
-    const [isAdd, setAdd] = useState(false)
+    const [isAdd, setAdd] = useState(false);
+    const [addAlert, setAlert] = useState(false);
     const anchorRef = useRef(null);
     const { removeCoin } = useCoins();
     const { addCoinToCompare } = useCoins();
+    const { coinsToCompare } = useCoins();
 
+    useEffect(() => {
+        coinsToCompare.length > 0 && coinsToCompare.forEach(coin => {
+            if (coin.id === coinId) {
+                setAdd(true)
+            }
+        })
+    })
 
     const handleNotificationClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-
-        setAdd(false);
     };
 
     const handleToggle = (ev) => {
@@ -61,14 +67,15 @@ export const OptionsMenu = ({ coinId, range }) => {
     }
     const handleRemoveCoin = (ev, coinId) => {
         ev.stopPropagation();
-        removeCoin(coinId, false);
+        isAdd ? removeCoin(coinId, true) : removeCoin(coinId, false)
         handleClose(ev);
     }
 
     const handleAddToCompare = (ev, range, coinId) => {
         ev.stopPropagation();
         addCoinToCompare(range, coinId);
-        setAdd(prevState => prevState = !prevState)
+        setAdd(true)
+        setAlert(prevState => !prevState)
         handleClose(ev);
     }
     // return focus to the button when we transitioned from !open -> open
@@ -80,7 +87,6 @@ export const OptionsMenu = ({ coinId, range }) => {
 
         prevOpen.current = open;
     }, [open]);
-
     return (
         <div className={classes.root}>
             <div>
@@ -97,7 +103,7 @@ export const OptionsMenu = ({ coinId, range }) => {
                         vertical: 'top',
                         horizontal: 'right',
                     }}
-                    open={isAdd}
+                    open={addAlert}
                     autoHideDuration={1500}
                     onClose={handleNotificationClose}
                     message="Coin Added Succefully"
@@ -118,7 +124,7 @@ export const OptionsMenu = ({ coinId, range }) => {
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={(ev) => handleAddToCompare(ev, range, coinId)}>Add To Compare</MenuItem>
+                                        <MenuItem onClick={isAdd ? (ev) => handleRemoveCoin(ev, coinId) : (ev) => handleAddToCompare(ev, range, coinId)}>{isAdd ? 'Remove Coin From Chart' : 'Add To Compare'}</MenuItem>
                                         <MenuItem onClick={(ev) => handleRemoveCoin(ev, coinId)}>Remove Coin</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
